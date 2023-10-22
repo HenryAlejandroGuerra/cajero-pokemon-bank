@@ -1,0 +1,16 @@
+{
+    "usuarios": [
+      {
+        "id": "1",
+        "nombre": "Henry",
+        "apellido": "Martínez",
+        "pin": "1234"
+      },
+      {
+        "id": "2",
+        "nombre": "Katherine",
+        "apellido": "Ramírez",
+        "pin": "5678"
+      }
+    ]
+  }
