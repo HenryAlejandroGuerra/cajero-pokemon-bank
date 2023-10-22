@@ -24,7 +24,9 @@ Al descargar el repositorio simplemente necesita ejecutar el archivo _index.html
 
 ## Construido con 🛠️
 
-* [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/download/) - El framework web usado
+* [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/download/) - Librería CSS para la interfaz
+* [Sweet Alert](https://sweetalert.js.org/guides/) - Librería para mostrar alertas de manera amigable al usuario
+* [jsPDF](https://rawgit.com/MrRio/jsPDF/master/docs/index.html) - Librería para crear PDFs desde Javascript
 
 ## Autores ✒️
 

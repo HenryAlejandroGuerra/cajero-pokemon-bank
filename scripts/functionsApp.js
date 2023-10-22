@@ -1,7 +1,10 @@
-// Variable que guardará la información del usuario que inicie sesión
-var infoUsuario;
-
 $(document).ready(function () {
+
+    //Inicializamos la pantalla
+    var infoUSuario;
+    var cierraSesion = false;
+
+    validarUsuario();
 
     // Función que verifica si el usuario existe
     function validarPin(event) {
@@ -18,13 +21,11 @@ $(document).ready(function () {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data.usuarios);
-                // Aquí puedes realizar la comparación con los datos del archivo JSON
+                // Aquí se realiza la comparación con los datos del archivo JSON
                 data.usuarios.forEach(usuario => {
-                    console.log(usuario);
                     if (usuario.pin === contrasenia) {
                         // El PIN ingresado coincide con el usuario en el archivo JSON
-                        infoUsuario = usuario;
+                        document.cookie = "idUsuario="+usuario.id;
                         window.location.href = "./home-pokemon-bank.html";
                     } else {
                         swal("PIN Incorrecto", "Inténtelo de nuevo", "error");
@@ -38,7 +39,66 @@ $(document).ready(function () {
 
     }
 
-    // Evento para ingresar al cajero
-    document.getElementById('login').addEventListener('submit', validarPin);
+    // Función para obtener información del usuario que inicio sesión
+    function validarUsuario() {
+        let idUsuario = obtenerCookie('idUsuario');
+        console.log('Usuario: '+idUsuario);
 
+        // Se valida que la cookie traiga información
+        if (idUsuario != undefined || idUsuario != null || cierraSesion == false){
+            // Se obtiene el archivo json con la información de los usuarios registrados
+            fetch('./resources/data/usuarios.json',
+            {
+                method: 'GET',
+                headers: new Headers({ 'Content-type': 'application/json'}),
+                mode: 'no-cors'
+            })
+            .then(response => response.json())
+            .then(data => {
+                data.usuarios.forEach(usuario => {
+                    if (usuario.id === idUsuario) {
+                        infoUSuario = usuario;
+                    }
+                });
+                document.getElementById('nombreUsuario').textContent = infoUSuario.nombre + ' ' + infoUSuario.apellido;
+            })
+            .catch(error => {
+                console.error('Error al cargar el archivo JSON:', error);
+            });
+        } else {
+            window.location.href = "./index.html";
+            swal("Sesión caducada", "Vuelva ingresar su PIN", "info");
+        }
+
+    }
+
+    // Función para obtener información del usuario que inicio sesión
+    function cerrarSesion(event) {
+        event.preventDefault();
+        cierraSesion = true;
+        document.cookie = "idUsuario=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location.href = "./index.html";
+    };
+
+    // Función para obtener la cookie que necesitemos
+    function obtenerCookie(nombreCookie){
+        let cookie= {};
+        document.cookie.split(';').forEach(el => {
+            let [key, value] = el.split('=');
+            cookie[key.trim()] = value;
+        });
+
+        return cookie[nombreCookie];
+    }
+
+    // Evento para cerrar sesion
+    if (document.getElementById('formMenuHome')) {
+        document.getElementById('formMenuHome').addEventListener('submit', cerrarSesion);
+    }
+
+    // Evento para ingresar al cajero
+    if (document.getElementById('formLogin')) {
+        document.getElementById('formLogin').addEventListener('submit', validarPin);
+    }
+    
 });

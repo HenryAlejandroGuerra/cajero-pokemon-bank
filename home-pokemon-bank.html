@@ -17,25 +17,73 @@
     <nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
       <ul class="navbar-nav">
         <!-- Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="nombreUsuario" data-toggle="dropdown">
-            Henry Martinez
-          </a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Link 1</a>
-          </div>
-        </li>
+        <form id="formMenuHome">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="nombreUsuario" data-toggle="dropdown"></a>
+            <div class="dropdown-menu">
+              <!-- <a class="dropdown-item" id="btnCerrarSesion" href="#" onclick="cerrarSesion()">Salir</a> -->
+              <button type="submit" class="dropdown-item" id="btnCerrarSesion">Cerrar Sesión</button>
+            </div>
+          </li>
+        </form>
       </ul>
     </nav>
 
     <br><br>
     <div class="container">
 
-      <div class="jumbotron text-center bg-light border" style="opacity: calc();">
+      <div class="jumbotron text-center bg-light border">
         <div class="row">
-          <div class="col-sm-4 border text-dark">Aquí va una</div>
-          <div class="col-sm-4 border text-dark">Aqui va otra</div>
-          <div class="col-sm-4 border text-dark">Aquí la última</div>
+          
+          <!-- Columna izquierda -->
+          <div class="col-sm-4 border text-dark">
+            
+            <!-- Opciones de la izquierda -->
+            <ul class="nav nav-tabs flex-column ">
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabDepositos">Depósito</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabRetiros">Retiro</a>
+              </li>
+            </ul>
+
+          </div>
+
+          <!-- Columna centro -->
+          <div class="col-sm-4 border text-dark">
+            <!-- Tab paneles -->
+            <div class="tab-content">
+              <div id="tabDepositos" class="container tab-pane fade"><br>
+                <h3>Depósitos</h3>
+              </div>
+              <div id="tabRetiros" class="container tab-pane fade"><br>
+                <h3>Retiros</h3>
+              </div>
+              <div id="tabConsultas" class="container tab-pane fade"><br>
+                <h3>Consultas de Saldo</h3>
+              </div>
+              <div id="tabServicios" class="container tab-pane fade"><br>
+                <h3>Pago de Servicios</h3>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna derecha -->
+          <div class="col-sm-4 border text-dark">
+
+            <!-- Opciones de la derecha -->
+            <ul class="nav nav-tabs flex-column ">
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabConsultas">Consulta de Saldo</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabServicios">Pago de servicios</a>
+              </li>
+              </li>
+            </ul>
+
+          </div>
         </div>
       </div>
 
