@@ -1,0 +1,12 @@
+{
+    "transacciones": [
+        {
+            "id": "1",
+            "idUsuario": "1",
+            "idCuenta": "1",
+            "transaccion": "Retiro",
+            "concepto": "Retiro de Cuenta",
+            "cantidad": 100
+        }
+    ]
+}

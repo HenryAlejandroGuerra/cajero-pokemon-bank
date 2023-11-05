@@ -9,10 +9,11 @@
     <script type="text/javascript" src="css/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="css/js/popper.min.js"></script>
     <script type="text/javascript" src="css/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="scripts/functionsApp.js"></script>
+    <script type="text/javascript" src="scripts/functionsHome.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
   </head>
 
-  <body style="background-image: url('resources/img/bg-forest.jpg'); background-size: cover; width: 100vw; height: 100vh;">
+  <body style="background-image: url('resources/img/pokemon-autumn.jpg'); background-size: cover; width: 100vw; height: 100vh;">
     
     <nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
       <ul class="navbar-nav">
@@ -46,6 +47,9 @@
               <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#tabRetiros">Retiro</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabHistorial">Historial de Transacciones</a>
+              </li>
             </ul>
 
           </div>
@@ -54,17 +58,67 @@
           <div class="col-sm-4 border text-dark">
             <!-- Tab paneles -->
             <div class="tab-content">
+              
               <div id="tabDepositos" class="container tab-pane fade"><br>
                 <h3>Depósitos</h3>
+                <br>
+                
+                <form id="formDeposito">
+                  <div class="form-group">
+                    
+                    <label for="seleccionCuenta">Cuenta:</label>
+                    <select class="form-control" id="seleccionCuentaDepositos" name="seleccionCuentaDepositos">
+                    </select>
+                    <br>
+                    <label for="cantDeposito">Cantidad a depositar:</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                      </div>
+                      <input type="number" min="0" class="form-control" placeholder="Cantidad de Depósito" id="cantDeposito" name="cantDeposito">
+                    </div>
+
+                  </div>
+                  <button type="submit" id="depositar" class="btn btn-primary">Depositar</button>
+                </form>
+                <br><br>
               </div>
+
               <div id="tabRetiros" class="container tab-pane fade"><br>
                 <h3>Retiros</h3>
+                <br>
+                
+                <form id="formRetiro">
+                  <div class="form-group">
+                    
+                    <label for="seleccionCuenta">Cuenta:</label>
+                    <select class="form-control" id="seleccionCuentaRetiros" name="seleccionCuentaRetiros">
+                    </select>
+                    <br>
+                    <label for="cantDeposito">Cantidad a retirar:</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                      </div>
+                      <input type="number" class="form-control" placeholder="Cantidad de Retiro" id="cantRetiro" name="cantRetiro">
+                    </div>
+
+                  </div>
+                  <button type="submit" id="retirar" class="btn btn-primary">Retirar</button>
+                </form>
+                <br><br>
               </div>
               <div id="tabConsultas" class="container tab-pane fade"><br>
                 <h3>Consultas de Saldo</h3>
               </div>
               <div id="tabServicios" class="container tab-pane fade"><br>
                 <h3>Pago de Servicios</h3>
+              </div>
+              <div id="tabHistorial" class="container tab-pane fade"><br>
+                <h3>Historial</h3>
+              </div>
+              <div id="tabAnalisis" class="container tab-pane fade"><br>
+                <h3>Análisis</h3>
               </div>
             </div>
           </div>
@@ -80,6 +134,8 @@
               <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#tabServicios">Pago de servicios</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabAnalisis">Análisis</a>
               </li>
             </ul>
 
