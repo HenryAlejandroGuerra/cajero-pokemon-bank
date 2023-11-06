@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    var asdf = 'Henry';
+    localStorage.setItem('nombre', asdf);
+    console.log('Ya se hizo macizo');
     //Inicializamos la pantalla
     var infoUSuario;
     var cuentasUsuario = [];
@@ -125,17 +128,21 @@ $(document).ready(function () {
                     console.log(nuevoSaldo);
                     cuenta.saldo = parseInt(nuevoSaldo);
                 }
-                var jsonString = JSON.stringify(data);
 
-                 // Guardar la cadena JSON en el archivo
-                fs.writeFile('./resources/data/cuentas.json', jsonString, 'utf8', function(err) {
-                    if (err) {
-                        console.log('Error al guardar el archivo JSON:', err);
-                    } else {
-                        console.log('Archivo JSON modificado y guardado exitosamente.');
-                    }
-                });
             });
+
+            console.log('Nuevo data');
+            console.log(data);
+            let jsonString = JSON.stringify(data);
+            // Guardar los cambios en el archivo JSON
+            fs.writeFile('./resources/data/cuentas.json', jsonString, 'utf8', function(err) {
+                if (err) {
+                    console.log('Error al guardar el archivo JSON:', err);
+                } else {
+                    console.log('Archivo JSON modificado y guardado exitosamente.');
+                }
+            });
+
         })
         .catch(error => {
             console.error('Error al cargar el archivo JSON:', error);
