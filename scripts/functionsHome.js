@@ -1,8 +1,5 @@
 $(document).ready(function () {
 
-    var asdf = 'Henry';
-    localStorage.setItem('nombre', asdf);
-    console.log('Ya se hizo macizo');
     //Inicializamos la pantalla
     var infoUSuario;
     var cuentasUsuario = [];
