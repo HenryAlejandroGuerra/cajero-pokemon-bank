@@ -2,15 +2,19 @@
   "usuarios": [
     {
       "id": "1",
-      "nombre": "Henry",
-      "apellido": "Martínez",
-      "pin": "1234"
+      "nombre": "Ash",
+      "apellido": "Ketchum",
+      "pin": "1234",
+      "cuenta": "0987654321",
+      "saldo": 500.00
     },
     {
       "id": "2",
-      "nombre": "Katherine",
-      "apellido": "Ramírez",
-      "pin": "5678"
+      "nombre": "Henry",
+      "apellido": "Martinez",
+      "pin": "5678",
+      "cuenta": "1011121314",
+      "saldo": 100.00
     }
   ]
 }
