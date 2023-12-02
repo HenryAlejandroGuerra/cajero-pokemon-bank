@@ -9,7 +9,8 @@ $(document).ready(function () {
                 "apellido": "Ketchum",
                 "pin": "1234",
                 "cuenta": "0987654321",
-                "saldo": 500.00
+                "saldo": 500,
+                "saldoFlotante": 0
             },
             {
                 "id": "2",
@@ -17,10 +18,20 @@ $(document).ready(function () {
                 "apellido": "Martinez",
                 "pin": "5678",
                 "cuenta": "1011121314",
-                "saldo": 100.00
+                "saldo": 100,
+                "saldoFlotante": 0
             }
         ]
     };
+
+    const jsonTransacciones = [];
+
+    let cantDepositos = 0;
+    let cantRetiros = 0;
+    let cantServicioElectricidad = 0;
+    let cantServicioAgua = 0;
+    let cantServicioInternet = 0;
+    let cantServicioTelefonia = 0;
 
     // Función que verifica si el usuario existe
     function validarPin(event) {
@@ -30,6 +41,12 @@ $(document).ready(function () {
 
         // Se obtiene el archivo json con la información de los usuarios registrados
         //const json = JSON.parse(jsonInicial);
+        localStorage.setItem('cantDepositos', cantDepositos);
+        localStorage.setItem('cantRetiros', cantRetiros);
+        localStorage.setItem('cantServicioElectricidad', cantServicioElectricidad);
+        localStorage.setItem('cantServicioAgua', cantServicioAgua);
+        localStorage.setItem('cantServicioInternet', cantServicioInternet);
+        localStorage.setItem('cantServicioTelefonia', cantServicioTelefonia);
 
         // Aquí se realiza la comparación con los datos del JSON
         jsonInicial.usuarios.forEach(usuario => {
@@ -42,6 +59,8 @@ $(document).ready(function () {
                 localStorage.setItem('pin', usuario.pin);
                 localStorage.setItem('cuenta', usuario.cuenta);
                 localStorage.setItem('saldo', usuario.saldo);
+                localStorage.setItem('saldoFlotante', usuario.saldoFlotante);
+                localStorage.setItem('historialTransacciones', JSON.stringify(jsonTransacciones));
                 window.location.href = "./home-pokemon-bank.html";
             } else {
                 swal("PIN Incorrecto", "Inténtelo de nuevo", "error");

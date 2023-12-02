@@ -9,8 +9,13 @@
     <script type="text/javascript" src="css/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="css/js/popper.min.js"></script>
     <script type="text/javascript" src="css/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="resources/jspdf.min.js"></script>
     <script type="text/javascript" src="scripts/functionsHome.js"></script>
+    <link href="resources/dataTable/datatables.min.css" rel="stylesheet">
+    <script src="resources/dataTable/datatables.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
   </head>
 
   <body style="background-image: url('resources/img/pokemon-autumn.jpg'); background-size: cover; width: 100vw; height: 100vh;">
@@ -34,13 +39,14 @@
     <div class="container">
 
       <div class="jumbotron text-center bg-light border">
+        <br>
+        <h3 class="text-center" id="mensajeBienvenida"></h3>
+        <br>
         <div class="row">
           
           <!-- Columna izquierda -->
-          <div class="col-sm-4 border text-dark">
-            
-            <!-- Opciones de la izquierda -->
-            <ul class="nav nav-tabs flex-column ">
+          <div class="col-sm-12 border text-dark">
+            <ul class="nav nav-tabs">
               <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#tabDepositos">Depósito</a>
               </li>
@@ -48,14 +54,25 @@
                 <a class="nav-link" data-toggle="tab" href="#tabRetiros">Retiro</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabServicios">Pago de servicios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabConsultas">Consulta de Saldo</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#tabHistorial">Historial de Transacciones</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tabAnalisis">Análisis</a>
+              </li>
             </ul>
-
           </div>
 
-          <!-- Columna centro -->
-          <div class="col-sm-4 border text-dark">
+        </div>
+
+        <!-- Pantalla abajo -->
+        <div class="row text-center bg-light border">
+          <div class="col-sm-12 border text-dark">
             <!-- Tab paneles -->
             <div class="tab-content">
               
@@ -66,7 +83,7 @@
                 <form id="formDeposito">
                   <div class="form-group">
                     
-                    <label for="seleccionCuenta">Cuenta:</label>
+                    <label for="seleccionCuentaDepositos">Cuenta:</label>
                     <select class="form-control" id="seleccionCuentaDepositos" name="seleccionCuentaDepositos">
                     </select>
                     <br>
@@ -91,11 +108,11 @@
                 <form id="formRetiro">
                   <div class="form-group">
                     
-                    <label for="seleccionCuenta">Cuenta:</label>
+                    <label for="seleccionCuentaRetiros">Cuenta:</label>
                     <select class="form-control" id="seleccionCuentaRetiros" name="seleccionCuentaRetiros">
                     </select>
                     <br>
-                    <label for="cantDeposito">Cantidad a retirar:</label>
+                    <label for="cantRetiro">Cantidad a retirar:</label>
                     <div class="input-group">
                       <div class="input-group-prepend">
                         <span class="input-group-text">$</span>
@@ -108,38 +125,73 @@
                 </form>
                 <br><br>
               </div>
+
+              <div id="tabServicios" class="container tab-pane fade"><br>
+                <h3>Pago de Servicios</h3>
+                <br>
+                
+                <form id="formPagoServicio">
+                  <div class="form-group">
+                    
+                    <label for="seleccionCuentaPagoServicio">Cuenta:</label>
+                    <select class="form-control" id="seleccionCuentaPagoServicio" name="seleccionCuentaPagoServicio">
+                    </select>
+
+                    <br>
+                    <label for="seleccionServicio">Servicio:</label>
+                    <select class="form-control" id="seleccionServicio" name="seleccionServicio">
+                    </select>
+
+                    <br>
+                    <label for="cantPagarServicio">Cantidad a pagar:</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                      </div>
+                      <input type="number" class="form-control" placeholder="Cantidad a pagar" id="cantPagarServicio" name="cantPagarServicio">
+                    </div>
+
+                  </div>
+                  <button type="submit" id="pagarServicio" class="btn btn-primary">Pagar Servicio</button>
+                </form>
+                <br><br>
+              </div>
               
               <div id="tabConsultas" class="container tab-pane fade"><br>
                 <h3>Consultas de Saldo</h3>
+                <br>
+                <label for="seleccionCuentaConsultas">Cuenta:</label>
+                <select class="form-control" id="seleccionCuentaConsultas" name="seleccionCuentaConsultas">
+                </select>
+                <br>
+                <form id="formConsulta">
+                  <button type="submit" id="consultar" class="btn btn-primary">Consultar</button>
+                </form>
+                <br>
+                <table id="consultasSaldoTabla" class="display" style="width:100%"></table>
+                <br><br>
               </div>
-              <div id="tabServicios" class="container tab-pane fade"><br>
-                <h3>Pago de Servicios</h3>
-              </div>
+              
               <div id="tabHistorial" class="container tab-pane fade"><br>
-                <h3>Historial</h3>
+                <h3>Historial de Transacciones</h3>
+                <br>
+                <table id="HistorialTabla" class="display" style="width:100%"></table>
+                <br><br>
               </div>
+
               <div id="tabAnalisis" class="container tab-pane fade"><br>
                 <h3>Análisis</h3>
+                <br>
+                <form id="formAnalisis">
+                  <button type="submit" id="descargarPDF" class="btn btn-secondary">Descargar PDF</button>
+                </form>
+                <br>
+                <div class="chart">
+                  <canvas id="analisisTransacciones" style="padding-top: 5%;"></canvas>
+                </div>
               </div>
+
             </div>
-          </div>
-
-          <!-- Columna derecha -->
-          <div class="col-sm-4 border text-dark">
-
-            <!-- Opciones de la derecha -->
-            <ul class="nav nav-tabs flex-column ">
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tabConsultas">Consulta de Saldo</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tabServicios">Pago de servicios</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tabAnalisis">Análisis</a>
-              </li>
-            </ul>
-
           </div>
         </div>
       </div>
